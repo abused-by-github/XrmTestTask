@@ -10,6 +10,8 @@
 Проект имеет типичную многослойную структуру: Web UI - Business Logic - Data Access. Дополнительно имеется слой адаптеров для API e1.ru (E1Client). Каждый слой представлен двумя компонентами-сборками - одна содержит API, вторая - реализацию. Такая структура обеспечивает слабую связность между компонентами. Для интеграции компонентов используется IoC container [Autofac](http://autofac.org/). Решение полностью построено на принципе Dependency Injection - все компоненты создаются исключительно контейнером, что обеспечивает полностью автоматическое разрешение зависимостей и управление жизненным циклом. Data access layer реализован на основе ORM [Entity Framework] (https://msdn.microsoft.com/en-us/data/ef.aspx) (code-first подход). СУБД - MSSQLServer 2012. 
 
 Намеренно не было реализованно (с целью экономии времени):
-1. Логирование. Базовое логирование легко реализуется через [Autofac type interceptors] (http://docs.autofac.org/en/latest/advanced/interceptors.html).
-2. Обработка ошибок. Исчерпывающее решение для web-приложения - Application_Error обработчик в Global.asax.
-3. Модульные тесты. Любой популярный фреймворк + [Fluent Assertions](http://www.fluentassertions.com/).
+* 1. Логирование. Базовое логирование легко реализуется через [Autofac type interceptors] (http://docs.autofac.org/en/latest/advanced/interceptors.html).
+* 2. Обработка ошибок. Исчерпывающее решение для web-приложения - Application_Error обработчик в Global.asax.
+* 3. Модульные тесты. Любой популярный фреймворк + [Fluent Assertions](http://www.fluentassertions.com/).
+
+Разработка заняла 3 часа.
