@@ -1,0 +1,55 @@
+﻿@model XrmTestTask.WebApp.Models.IndexModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link type="text/css" href="~/Scripts/jquery-ui-1.11.3.custom/jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.3.custom/external/jquery/jquery.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.3.custom/jquery-ui.js"></script>
+    <script type="text/javascript" src="~/Scripts/Resume.js"></script>
+    <title>Поиск резюме</title>
+</head>
+<body>
+    <div>
+        <form action="Resume/Grab" method="POST">
+            <input type="submit" value="Grab" />
+        </form>
+        <div>
+            <form method="GET">
+                <input type="hidden" value="@Model.SearchRequest.PageSize" name="PageSize"/>
+                <label>Заголовок:<input type="text" name="Header" value="@Model.SearchRequest.Header" /></label><br/>
+                <label>Добавлено: </label>
+                <input type="text" name="DateFrom" data-type="date" value="@Model.DateFrom" />
+                - <input type="text" name="DateTo" data-type="date" value="@Model.DateTo" />
+                <label>Страница</label>
+                <select name="PageNumber">
+                    @for (var i = 1; i <= Model.TotalPages; ++i)
+                    {
+                        <option value="@i" @(i == Model.SearchRequest.PageNumber ? "selected" : "")>@i</option>
+                    }
+                </select>
+                <input type="submit" value="Поиск" />
+            </form>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th>Добавлено</th>
+                    <th>Заголовок</th>
+                </tr>
+                @foreach (var item in Model.SearchResult.Items)
+                {
+                    <tr>
+                        <td>@item.DateAdded</td>
+                        <td>
+                            <a href="http://rabota.e1.ru@(item.Url)" target="_blank">@item.Header</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</body>
+</html>
